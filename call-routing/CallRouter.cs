@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace call_routing
 {
@@ -9,7 +10,8 @@ namespace call_routing
         // Function to receive the phone number and Dictionary containing the operators and operator rates per country code
         public static string FindCheapestOperator(string phoneNumber, Dictionary<string, Dictionary<string, string>> operatorsList)
         {
-            if (string.IsNullOrEmpty(phoneNumber)) return string.Empty;
+            // Check if the phoneNumber is null or empty or contains any non numeric chars
+            if (string.IsNullOrEmpty(phoneNumber) || !Regex.IsMatch(phoneNumber, @"^\d+$")) return string.Empty;
             string currentCheapestOperator = string.Empty;
             float currentCallRate = float.MaxValue;
 
